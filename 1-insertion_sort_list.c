@@ -9,7 +9,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *cur, *next;
 	/*if list is empty or elements of list are less than two*/
-	if (*list == NULL || (*list)->next == NULL || list == NULL)
+	if ((*list)->next == NULL || list == NULL)
 		return;
 	cur = *list;
 	while (cur != NULL)
