@@ -15,17 +15,19 @@ void selection_sort(int *array, size_t size)
 
 	if (array == NULL || size < 2)
 		return;
-
-	for (i = 0; i < size - 1; i++)
+	i = 0;
+	while (i < size - 1)
 	{
 		/* Find the index of the minimum element in the remaining unsorted array */
 		min_idx = i;
-		for (j = i + 1; j < size; j++)
+		j = i + 1;
+		while (j < size)
 		{
 			if (array[j] < array[min_idx])
 			{
 				min_idx = j;
 			}
+			j++;
 		}
 
 		/* Swap the found minimum element with the current element */
@@ -36,6 +38,7 @@ void selection_sort(int *array, size_t size)
 			array[min_idx] = temp;
 			print_array(array, size);
 		}
+		i++;
 	}
 }
 
