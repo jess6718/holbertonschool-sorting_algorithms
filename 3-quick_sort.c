@@ -20,57 +20,58 @@ void swap(int *array, int i, int j, size_t size)
 /**
   *partition - locate pivot and insert it to the correct index
   *@array: array passed in
-  *@left: the index of the far left number
-  *@right: the index of the far right number
+  *@low: the index of lower bound in array
+  *@high: the index of higher bound in array
   *@size: size of the array
-  *Return: pivot
+  *Return: pivot index
   */
-int partition(int *array, int left, int right, size_t size)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot;
 	int i;
 	int j;
 
-	pivot = array[right];
-	i = left - 1;
-	j = left;
-	while (j < right)
+	pivot = array[high];
+	i = low - 1;
+	j = low;
+	while (j < high)
 	{
 		if (array[j] < pivot)
 		{
-			i = i + 1;
-			if (i != j)
-			{
-				swap(array, i, j, size);
+				i = i + 1;
+				if (i != j)
+				{
+					swap (array, i, j, size);
+				}
 			}
+			j = j + 1;
 		}
-		j = j + 1;
-	}
-
 	if (array[i + 1] != pivot)
 	{
-		swap(array, i + 1, right, size);
+		swap(array, i + 1, high, size);
 	}
 	return (i + 1);
 }
 
 /**
-  *sort_arr - sorts an array of integers with recursion
+  *sort_arr - sorts left / right partition recursively
   *@array: array passed in
-  *@left: the index of the far left number
-  *@right: the index of the far right number
+  *@low: the index of lower bound in array
+  *@high: the index of higher bound in array
   *@size: size of the array
   *Return: void
   */
-void sort_arr(int  *array, int left, int right, size_t size)
+void sort_arr(int  *array, int low, int high, size_t size)
 {
 	int pivot;
 
-	if (left < right)
+	if (low < high)
 	{
-		pivot = partition(array, left, right, size);
-		sort_arr(array, left, pivot - 1, size);
-		sort_arr(array, pivot + 1, right, size);
+		pivot = partition(array, low, high, size);
+		/*sort left partition*/
+		sort_arr(array, low, pivot - 1, size);
+		/*sort right partition*/ 
+		sort_arr(array, pivot + 1, high, size);
 	}
 }
 
